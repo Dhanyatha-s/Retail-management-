@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Product{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1 class="text-center">Edit Product</h1>
+        <form method="POST" class="bg-light p-4 rounded shadow-sm">
+            {{ form.hidden_tag() }}  <!-- For CSRF protection if you are using Flask-WTF -->
+            <div class="form-group">
+                <label for="name">Product Name:</label>
+                {{ form.name(class_='form-control', placeholder='Enter product name') }}
+                {% for error in form.name.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                {{ form.price(class_='form-control', placeholder='Enter price') }}
+                {% for error in form.price.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="unit">Unit:</label>
+                {{ form.unit(class_='form-control', placeholder='e.g., kg, L') }}
+                {% for error in form.unit.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="category">Category:</label>
+                {{ form.category(class_='form-control') }}
+                {% for error in form.category.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Update Product</button>
+        </form>
+        <div class="text-center mt-3">
+            <a href="{{ url_for('products') }}" class="btn btn-secondary">Back to Products</a>
+        </div>
+    </div>
+{% endblock %}
